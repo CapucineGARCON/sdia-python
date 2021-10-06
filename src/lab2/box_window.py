@@ -15,8 +15,15 @@ class BoxWindow:
             args (list): list of the dimensions (for example in dimension2 [a1, b1] x [a2, b2])
         """
         """On pourrait vérifier que bounds est de la forme nx2"""
+
+        # np.atleast2d(bounds, dtype=float)
         # ? why isn't the check implemented and tested
+
         self.bounds = np.array(bounds)
+        a, b = self.bounds[:, 0], self.bounds[:, 1]
+        assert np.all(a < b)
+
+        # écrire d'abord un test qui nous raise une erreur quand on lui donne des bornes dans le mauvais sens.
 
     def __str__(self):
         r"""BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
@@ -80,6 +87,7 @@ class BoxWindow:
 
     # ! wrong spelling of length
     # todo test it
+    # tested
     def length(self):
         """This method return the lenght for each dimension of the BoxWindow.
 
@@ -93,6 +101,7 @@ class BoxWindow:
             l = l + [self.bounds[i][1] - self.bounds[i][0]]
         return l
 
+    # tested
     def volume(self):
         """It returns the volume of the BoxWindow, if dimension is greater (or equal) than 3, otherwise, it returns the area in dimension 2, the lenght in dimension 1.
 
@@ -118,7 +127,7 @@ class BoxWindow:
             [list] : [list of booleans, with True if the point is contained in the BoxWindow, False if not]
         """
         # * Nice try to handle multiple points
-        # ! however method contains is not defined
+        # ! however method contains is not defined ok
         a = []
         for i in range(len(args)):
             a = a + [self.indicator_function(args[i])]
