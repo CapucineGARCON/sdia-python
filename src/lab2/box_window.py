@@ -29,7 +29,7 @@ class BoxWindow:
         # ! use f-strings
         # * consider for a, b in self.bounds
         for i in range(self.bounds.shape[0]):
-            b += str(list(self.bounds[i])) + " x "
+            b += f"{list(self.bounds[i])} x "
         return b[:-3]
 
     def shape(self):
@@ -41,7 +41,7 @@ class BoxWindow:
         Le premier return permet d'avoir la première dimension.
         """
         # ? how about str(self.bounds.shape)
-        return f"{self.bounds.shape[0]} x 2"
+        return self.bounds.shape
 
     def indicator_function(self, point):
         """Check if the point is contained in the BoxWindow
@@ -53,21 +53,34 @@ class BoxWindow:
             [bool] : True if the point is contained in the box, False if not.
         """
         # * consider for i, (a, b) in enumerate(self.bounds)
-        a = True
-        for i in range(self.bounds.shape[0]):
+        s = True
+        # for i in range(self.bounds.shape[0]):
+        for i, (a, b) in enumerate(self.bounds):
             if (self.bounds[i, 0] <= point[i]) and (point[i] <= self.bounds[i, 1]):
-                a == True
+                s == True
             else:
                 return False
-        return a
+        return s
+
+    def __contains__(self, point):
+        # make sure point has right dimension
+        a, b = self.bounds[:, 0], self.bounds[:, 1]
+        return np.all(a <= point) and np.all(
+            point <= b
+        )  # Python exécute de façon lazy ce qu'on lui dit, si c'est faux pour a au début il s'arrête et renvoie directement faux.
+
+        # np.all(np.logical_and(a <= point, point <=b))  en grande dimension cela est coûteux parce que l'on doit vérifier les deux conditions à chaque fois
 
     def dimension(self):
-        """"""
+        """
+
+
+        """
         return {self.bounds.shape[0]}
 
     # ! wrong spelling of length
     # todo test it
-    def lenght(self):
+    def length(self):
         """This method return the lenght for each dimension of the BoxWindow.
 
         Returns:
@@ -108,7 +121,7 @@ class BoxWindow:
         # ! however method contains is not defined
         a = []
         for i in range(len(args)):
-            a = a + [self.contains(args[i])]
+            a = a + [self.indicator_function(args[i])]
 
         return a
 
