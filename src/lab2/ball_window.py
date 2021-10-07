@@ -4,7 +4,12 @@ import numpy as np
 # todo implement, document and test the class
 class BallWindow:
     def __init__(self, center, radius):
+        """
 
+        Args:
+            center (array): a point with two coordinates.
+            radius (int):
+        """
         self.center = np.array(center)
         self.radius = radius
 
@@ -13,4 +18,4 @@ class BallWindow:
         Args:
             point ([type]): [description]
         """
-        all(abs(i - j) < self.radius for i, j in point, self.center)
+        all((i - j) < self.radius for i, j in point, self.center)
