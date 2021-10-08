@@ -24,6 +24,18 @@ def test_raise_type_error_when_something_is_called():
 def test_box_string_representation(bounds, expected):
     assert str(BoxWindow(bounds)) == expected
 
+    # ================================
+    # ==== WRITE YOUR TESTS BELOW ====
+    # ================================
+
+    # @pytest.mark.parametrize(
+    "bounds, expected", [([[3, 2]], AssertionError),],
+
+
+# )
+# def test_bounds(bounds, expected):
+# assert BoxWindow(bounds) == expected
+
 
 @pytest.fixture
 def box_2d_05():
@@ -103,6 +115,5 @@ def test_length(bounds, expected):
     assert BoxWindow(bounds).length() == expected
 
 
-# ================================
-# ==== WRITE YOUR TESTS BELOW ====
-# ================================
+def test_rand_box_2d_05(box_2d_05):
+    assert np.all(box_2d_05.indicator_function_several(box_2d_05.rand(n=10)))
