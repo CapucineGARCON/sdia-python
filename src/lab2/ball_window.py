@@ -51,6 +51,6 @@ class BallWindow:
         """Calculate the area/ the curved surface of the ball.
 
         Returns:
-            string :
+            string : a sentence with the area of the ball
         """
         return f"The area is {round(4 * np.pi * self.radius **2, 2)}"

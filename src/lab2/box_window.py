@@ -106,7 +106,7 @@ class BoxWindow:
         """It returns the volume of the BoxWindow, if dimension is greater (or equal) than 3, otherwise, it returns the area in dimension 2, the lenght in dimension 1.
 
         Returns:
-            [str] : [the volume of the BoxWindow.]
+            [str] : the volume of the BoxWindow.
 
         """
         x1 = self.bounds[:, 0]

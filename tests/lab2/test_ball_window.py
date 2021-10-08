@@ -42,7 +42,8 @@ def test_ball_volume(center, radius, expected):
 
 
 @pytest.mark.parametrize(
-    "center, radius, expected", [([1, 2], 1, "The area is 12.57"),],
+    "center, radius, expected",
+    [([1, 2], 1, "The area is 12.57"), ([3, 2, 4], 2, "The area is 50.27"),],
 )
 def test_ball_area(center, radius, expected):
     assert (BallWindow(center, radius)).area() == expected
