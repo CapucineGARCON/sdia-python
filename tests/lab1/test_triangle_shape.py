@@ -1,6 +1,6 @@
 import pytest
 
-from lab1.functions import triangle_shape
+from sdia_python.lab1.functions import triangle_shape
 
 triangle_strings = [
     "",
