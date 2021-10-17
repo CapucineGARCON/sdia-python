@@ -4,10 +4,20 @@ import pytest
 from sdia_python.lab2.ball_window import BallWindow, UnitBallWindow
 
 
-def test_raise_type_error_when_something_is_called():
-    with pytest.raises(TypeError):
-        # call_something_that_raises_TypeError()
-        raise TypeError()
+def test_raise_type_error_when_radius_invalid():
+    with pytest.raises(AssertionError):
+        BallWindow([2, 1], -2)
+
+
+def test_raise_type_error_when_center_invalid():
+    with pytest.raises(AssertionError):
+        BallWindow([], 2)
+
+
+def test_raise_type_error_when_point_dimension_invalid():
+    with pytest.raises(AssertionError):
+        ball = BallWindow([1, 2, 3], 2)
+        ball.__contains__([1, 2])
 
 
 @pytest.mark.parametrize(

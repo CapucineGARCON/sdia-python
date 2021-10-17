@@ -25,9 +25,6 @@ class BoxWindow:
         """
 
         b = "BoxWindow: "
-        # ! use f-strings
-        # * consider for a, b in self.bounds
-        # for i in range(self.bounds.shape[0]):
         for a in self.bounds:
             b += f"{list(a)} x "
         return b[:-3]
@@ -50,7 +47,7 @@ class BoxWindow:
         Returns:
             bool : True if the point is contained in the box, False if not.
         """
-
+        assert len(point) == self.shape()[0]
         s = True
         for i, (a, b) in enumerate(self.bounds):
             if (self.bounds[i, 0] <= point[i]) and (point[i] <= self.bounds[i, 1]):
@@ -119,8 +116,10 @@ class BoxWindow:
 
             list : list of booleans, with True if the point is contained in the BoxWindow, False if not
         """
+
         a = []
         for b in args:
+            assert len(b) == self.shape()[0]
             a = a + [self.indicator_function(b)]
         return a
 
@@ -129,7 +128,7 @@ class BoxWindow:
 
         Args:
             n (int, optional): It is the number of points we want to create. Defaults to 1.
-            rng ([type], optional): [description]. Defaults to None.
+            rng (int, optional): [description]. Defaults to None.
         """
         rng = get_random_number_generator(rng)
         points = []

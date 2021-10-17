@@ -5,10 +5,21 @@ from sdia_python.lab2.box_window import BoxWindow
 from sdia_python.lab2.box_window import UnitBoxWindow
 
 
-def test_raise_type_error_when_something_is_called():
-    with pytest.raises(TypeError):
-        # call_something_that_raises_TypeError()
-        raise TypeError()
+def test_raise_type_error_when_Box_Window_with_wrong_bounds():
+    with pytest.raises(AssertionError):
+        BoxWindow([[1, 2], [3, 1]])
+
+
+def test_raise_type_error_when_point_dimension_invalid():
+    with pytest.raises(AssertionError):
+        box = BoxWindow([[1, 2], [1, 2]])
+        box.indicator_function([1, 2, 5])
+
+
+def test_raise_type_error_when_point_dimension_invalid_for_several():
+    with pytest.raises(AssertionError):
+        box = BoxWindow([[1, 2], [1, 2]])
+        box.indicator_function_several([[1, 2, 5], [1, 2]])
 
 
 @pytest.mark.parametrize(
@@ -24,10 +35,6 @@ def test_raise_type_error_when_something_is_called():
 )
 def test_box_string_representation(bounds, expected):
     assert str(BoxWindow(bounds)) == expected
-
-    # ================================
-    # ==== WRITE YOUR TESTS BELOW ====
-    # ================================
 
 
 @pytest.fixture

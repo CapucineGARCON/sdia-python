@@ -1,5 +1,7 @@
 import numpy as np
 
+from sdia_python.lab2.utils import get_random_number_generator
+
 
 class BallWindow:
     """Create a ball with a center and a radius
@@ -15,6 +17,8 @@ class BallWindow:
 
         self.center = np.array(center)
         self.radius = radius
+        assert self.radius >= 0
+        assert len(center)
 
     # tested
     def __str__(self):
