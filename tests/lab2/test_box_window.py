@@ -29,14 +29,6 @@ def test_box_string_representation(bounds, expected):
     # ==== WRITE YOUR TESTS BELOW ====
     # ================================
 
-    # @pytest.mark.parametrize(
-    "bounds, expected", [([[3, 2]], AssertionError),],
-
-
-# )
-# def test_bounds(bounds, expected):
-# assert BoxWindow(bounds) == expected
-
 
 @pytest.fixture
 def box_2d_05():
@@ -125,3 +117,11 @@ def test_rand_box_2d_05(box_2d_05):
 )
 def test_unit_box_window(center, expected):
     assert np.all(UnitBoxWindow(center).bounds == expected)
+
+
+@pytest.mark.parametrize(
+    "bounds, expected",
+    [([[1, 2], [2, 3], [1, 2]], 3), ([[1, 2]], 1), ([[3, 4], [5, 5]], 2),],
+)
+def test_box_dimension(bounds, expected):
+    assert BoxWindow(bounds).dimension() == expected

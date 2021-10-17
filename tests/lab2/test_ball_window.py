@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from sdia_python.lab2.ball_window import BallWindow
+from sdia_python.lab2.ball_window import BallWindow, UnitBallWindow
 
 
 def test_raise_type_error_when_something_is_called():
@@ -47,3 +47,26 @@ def test_ball_volume(center, radius, expected):
 )
 def test_ball_area(center, radius, expected):
     assert (BallWindow(center, radius)).area() == expected
+
+
+@pytest.mark.parametrize(
+    "points, expected",
+    [([[0, 6], [0, 2], [0, 0], [1, 4.5]], [True, False, False, True]),],
+)
+def test_indicator_function_ball_1(ball_1, points, expected):
+    assert ball_1.indicator_function(points) == expected
+
+
+@pytest.mark.parametrize(
+    "center, radius, expected",
+    [([0, 6], 2, 2), ([1, 2, 3], 6, 3), ([10, 0, 9, 1], 1, 4),],
+)
+def test_ball_dimension(center, radius, expected):
+    assert BallWindow(center, radius).dimension() == expected
+
+
+@pytest.mark.parametrize(
+    "center, expected", [([0, 6], 1), ([1, 2, 3], 1), ([10, 0, 9, 1], 1),],
+)
+def test_Unit_Ball(center, expected):
+    assert UnitBallWindow(center).radius == expected

@@ -1,7 +1,6 @@
 import numpy as np
 
 
-# todo implement, document and test the class
 class BallWindow:
     """Create a ball with a center and a radius
     """
@@ -25,6 +24,14 @@ class BallWindow:
             string: description with radius and center.
         """
         return f"A ball with center= {self.center} and radius= {self.radius}"
+
+    def dimension(self):
+        """Give the dimension of the space
+
+        Returns:
+            int : It is an integer that gives the dimension.
+        """
+        return len(self.center)
 
     # tested
     def __contains__(self, point):
@@ -51,6 +58,30 @@ class BallWindow:
         """Calculate the area/ the curved surface of the ball.
 
         Returns:
-            string : a sentence with the area of the ballimport sdia_python.lab
+            string : a sentence with the area of the ball
         """
         return f"The area is {round(4 * np.pi * self.radius **2, 2)}"
+
+    def indicator_function(self, args):
+        """Check if the points are contained in the Ball, it returns True if the point is in the Ball, and False if not.
+
+        Args:
+            args (list): list of the points' coordonnates to be tested
+
+        Returns:
+            list: list of booleans.
+        """
+        a = []
+        for b in args:
+            a = a + [self.__contains__(b)]
+        return a
+
+
+class UnitBallWindow(BallWindow):
+    def __init__(self, center):
+        """Create a unit Ball, a Ball with a radius of 1.
+
+        Args:
+            center (list): list with the coordonnates of the center of the ball.
+        """
+        super(UnitBallWindow, self).__init__(center, 1)

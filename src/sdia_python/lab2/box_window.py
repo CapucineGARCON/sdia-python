@@ -82,7 +82,7 @@ class BoxWindow:
         Returns:
             int: dimension of the space, also the dimension of the box.
         """
-        return {self.bounds.shape[0]}
+        return self.bounds.shape[0]
 
     def length(self):
         """This method return the length for each dimension of the BoxWindow.
@@ -150,10 +150,9 @@ class BoxWindow:
         return list(np.mean(self.bounds, axis=1))
 
 
-# todo implement, document and test the class
 class UnitBoxWindow(BoxWindow):
     def __init__(self, center):
-        """Create a box that is centered in a point.
+        """Create a unit Box, a Box with a length of 1 in each dimension.
 
         Args:
             center (list, optional): Center is a list with the coordonnates of the center. Defaults to None.
