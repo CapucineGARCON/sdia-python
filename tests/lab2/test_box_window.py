@@ -2,6 +2,7 @@ import numpy as np
 import pytest
 
 from sdia_python.lab2.box_window import BoxWindow
+from sdia_python.lab2.box_window import UnitBoxWindow
 
 
 def test_raise_type_error_when_something_is_called():
@@ -117,3 +118,10 @@ def test_length(bounds, expected):
 
 def test_rand_box_2d_05(box_2d_05):
     assert np.all(box_2d_05.indicator_function_several(box_2d_05.rand(n=10)))
+
+
+@pytest.mark.parametrize(
+    "center, expected", [([2.5, 2.5], np.array([[2, 3], [2, 3]])),],
+)
+def test_unit_box_window(center, expected):
+    assert np.all(UnitBoxWindow(center).bounds == expected)

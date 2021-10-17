@@ -4,7 +4,6 @@ from sdia_python.lab2.utils import get_random_number_generator
 
 
 # todo make a pass on the docstrings
-#
 class BoxWindow:
     """This class BoxWindow create a box with dimension [a1, b1] x ... x [an, bn."""
 
@@ -14,9 +13,7 @@ class BoxWindow:
         Args:
             bounds (list): list of the dimensions (for example in dimension2 [a1, b1] x [a2, b2])
         """
-        # np.atleast2d(bounds, dtype=float)
-        # ? why isn't the check implemented and tested
-        self.bounds = np.array(bounds)
+        self.bounds = np.atleast_2d(bounds)
         a, b = self.bounds[:, 0], self.bounds[:, 1]
         assert np.all(a <= b)
 
@@ -30,8 +27,9 @@ class BoxWindow:
         b = "BoxWindow: "
         # ! use f-strings
         # * consider for a, b in self.bounds
-        for i in range(self.bounds.shape[0]):
-            b += f"{list(self.bounds[i])} x "
+        # for i in range(self.bounds.shape[0]):
+        for a in self.bounds:
+            b += f"{list(a)} x "
         return b[:-3]
 
     def shape(self):
@@ -86,22 +84,22 @@ class BoxWindow:
         """
         return {self.bounds.shape[0]}
 
-    # tested
     def length(self):
-        """This method return the lenght for each dimension of the BoxWindow.
+        """This method return the length for each dimension of the BoxWindow.
 
         Returns:
-            list : l[i] with the lenght of the BoxWindow in dimension i
+            list : l[i] with the length of the BoxWindow in dimension i
 
         """
         l = []
-        for i in range(self.bounds.shape[0]):
-            l += list(np.diff(self.bounds[i]))
+        # for i in range(self.bounds.shape[0]):
+        for a in self.bounds:
+            l += list(np.diff(a))
         return l
 
     # tested
     def volume(self):
-        """It returns the volume of the BoxWindow, if dimension is greater (or equal) than 3, otherwise, it returns the area in dimension 2, the lenght in dimension 1.
+        """It returns the volume of the BoxWindow, if dimension is greater (or equal) than 3, otherwise, it returns the area in dimension 2, the length in dimension 1.
 
         Returns:
             str : the volume of the BoxWindow.
@@ -111,7 +109,6 @@ class BoxWindow:
         x2 = self.bounds[:, 1]
         return np.prod(np.diff(self.bounds[:]))
 
-    # tested
     def indicator_function_several(self, args):
         """Check if the several points are contained in the BoxWindow or not.
 
@@ -122,23 +119,19 @@ class BoxWindow:
 
             list : list of booleans, with True if the point is contained in the BoxWindow, False if not
         """
-        # * Nice try to handle multiple points
-        # ! however method contains is not defined
         a = []
-        for i in range(len(args)):
-            a = a + [self.indicator_function(args[i])]
+        for b in args:
+            a = a + [self.indicator_function(b)]
         return a
 
-    # tested
     def rand(self, n=1, rng=None):
         """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
 
         Args:
-            n (int, optional): [description]. Defaults to 1.
+            n (int, optional): It is the number of points we want to create. Defaults to 1.
             rng ([type], optional): [description]. Defaults to None.
         """
         rng = get_random_number_generator(rng)
-        # * convention: use _ for unused counters
         points = []
         for i in range(n):
             point = []
@@ -151,7 +144,7 @@ class BoxWindow:
         """Returns the center of the BoxWindow
 
         Returns:
-            [list]: [coordonnates of the center]
+            list: coordonnates of the center.
         """
 
         return list(np.mean(self.bounds, axis=1))
@@ -159,12 +152,12 @@ class BoxWindow:
 
 # todo implement, document and test the class
 class UnitBoxWindow(BoxWindow):
-    def __init__(self, center, dimension, bounds):
+    def __init__(self, center):
         """Create a box that is centered in a point.
 
         Args:
-            center (list, optional): . Defaults to None.
+            center (list, optional): Center is a list with the coordonnates of the center. Defaults to None.
         """
-        self.dimension = dimension
+
         bounds = np.add.outer(center, [-0.5, 0.5])
-        super(UnitBoxWindow, self).__init__(center, dimension, bounds)
+        super(UnitBoxWindow, self).__init__(bounds)
