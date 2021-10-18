@@ -1,6 +1,6 @@
 import pytest
 
-from sdia_python.lab1.functions import is_unique
+from lab1.functions import is_unique
 
 
 @pytest.mark.parametrize(

@@ -1,8 +1,8 @@
 import numpy as np
 import pytest
 
-from sdia_python.lab2.box_window import BoxWindow
-from sdia_python.lab2.box_window import UnitBoxWindow
+from lab2.box_window import BoxWindow
+from lab2.box_window import UnitBoxWindow
 
 
 def test_raise_type_error_when_Box_Window_with_wrong_bounds():

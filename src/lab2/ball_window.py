@@ -1,6 +1,6 @@
 import numpy as np
 
-from sdia_python.lab2.utils import get_random_number_generator
+from lab2.utils import get_random_number_generator
 
 
 class BallWindow:
