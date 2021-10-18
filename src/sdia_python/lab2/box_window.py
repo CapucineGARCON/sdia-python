@@ -5,7 +5,7 @@ from sdia_python.lab2.utils import get_random_number_generator
 
 # todo make a pass on the docstrings
 class BoxWindow:
-    """This class BoxWindow create a box with dimension [a1, b1] x ... x [an, bn."""
+    """This class BoxWindow create a box with dimension [a1, b1] x ... x [an, bn]."""
 
     def __init__(self, bounds):
         """Create the attribute bounds of the class BoxWindow.
