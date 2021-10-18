@@ -6,7 +6,7 @@ from lab2.ball_window import BallWindow, UnitBallWindow
 
 def test_raise_type_error_when_radius_invalid():
     with pytest.raises(AssertionError):
-        BallWindow([2, 1], -2)
+        BallWindow([2, 1], -10)
 
 
 def test_raise_type_error_when_center_invalid():
